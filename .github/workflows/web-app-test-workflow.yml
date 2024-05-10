@@ -78,16 +78,17 @@ jobs:
         run: unzip release.zip
 
 
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A7CBF068F3AB4AACBAE22877D49A91BB }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_46CDA6F218A545F9B3BDC78688E439DB }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_043DD70F613C4B16B1E212BD1C0109BD }}
+      # - name: Login to Azure
+      #   uses: azure/login@v1
+      #   with:
+      #     client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A7CBF068F3AB4AACBAE22877D49A91BB }}
+      #     tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_46CDA6F218A545F9B3BDC78688E439DB }}
+      #     subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_043DD70F613C4B16B1E212BD1C0109BD }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
           app-name: 'test-web-wbx'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           slot-name: 'Production'
